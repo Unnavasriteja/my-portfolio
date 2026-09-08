@@ -41,8 +41,10 @@ export const Home = () => {
               <span className="text-primary-500">whoami</span>
             </div>
 
-            <div className="font-mono text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-primary-500">
-              <Typewriter text="Sai Sri Teja Unnava — DevOps & Cloud Engineer" delay={80} />
+            <div className="font-mono text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary-500">
+
+            
+              <Typewriter text="Sai Sri Teja Unnava - DevOps & Cloud Engineer" delay={80} />
               <span className="terminal-cursor ml-2" />
             </div>
 
