@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TerminalHeader } from '../components/TerminalHeader';
 import { Typewriter } from '../components/Typewriter';
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, ExternalLink, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, Github, Linkedin, ExternalLink, CheckCircle } from 'lucide-react';
 import { CONTACT } from '../data/portfolio';
 
 export const Contact = () => {
@@ -45,7 +45,7 @@ export const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -53,40 +53,37 @@ export const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Prepare form data for Web3Forms API
-      const formDataToSubmit = new FormData();
-      formDataToSubmit.append("access_key", "365d3bf2-3eff-4844-a5cc-ab67429f27d2");
-      formDataToSubmit.append("name", formData.name);
-      formDataToSubmit.append("email", formData.email);
-      formDataToSubmit.append("subject", formData.subject);
-      formDataToSubmit.append("message", formData.message);
-
-      // Submit to Web3Forms API
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formDataToSubmit
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      const response = await fetch(
+        "https://dlexf7i2dj.execute-api.us-east-1.amazonaws.com/prod/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
       if (data.success) {
         setIsSubmitted(true);
-        
-        // Reset form after success
+
         setTimeout(() => {
           setIsSubmitted(false);
-          setFormData({ name: '', email: '', subject: '', message: '' });
+          setFormData({ name: "", email: "", subject: "", message: "" });
         }, 3000);
       } else {
-        throw new Error("Form submission failed");
+        setErrors((prev) => ({
+          ...prev,
+          message: "Failed to send message. Please try again.",
+        }));
       }
     } catch (error) {
-      // Handle network or other errors
-      setErrors(prev => ({ ...prev, message: "Failed to send message. Please try again." }));
+      setErrors((prev) => ({
+        ...prev,
+        message: "Failed to send message. Please try again.",
+      }));
     } finally {
       setIsSubmitting(false);
     }
@@ -95,8 +92,7 @@ export const Contact = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -139,17 +135,10 @@ export const Contact = () => {
       icon: Linkedin,
       color: 'hover:text-blue-500',
     },
-    {
-      name: 'Twitter',
-      url: CONTACT.social.twitter,
-      icon: Twitter,
-      color: 'hover:text-blue-400',
-    },
   ];
 
   return (
     <div className="min-h-screen bg-bg-page">
-      {/* Terminal Header */}
       <TerminalHeader
         command="ping contact.server"
         description="Establishing connection to communication endpoint"
@@ -158,6 +147,7 @@ export const Contact = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12">
+            
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -195,7 +185,8 @@ export const Contact = () => {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Name Field */}
+                    
+                    {/* Name */}
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
@@ -206,15 +197,13 @@ export const Contact = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full bg-bg-elevated border ${errors.name ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors`}
+                        className={`w-full bg-bg-elevated border ${errors.name ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono`}
                         placeholder="Your full name"
                       />
-                      {errors.name && (
-                        <p className="text-red-500 text-sm mt-2">{errors.name}</p>
-                      )}
+                      {errors.name && <p className="text-red-500 text-sm mt-2">{errors.name}</p>}
                     </div>
 
-                    {/* Email Field */}
+                    {/* Email */}
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
@@ -225,15 +214,13 @@ export const Contact = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full bg-bg-elevated border ${errors.email ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors`}
+                        className={`w-full bg-bg-elevated border ${errors.email ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono`}
                         placeholder="your.email@example.com"
                       />
-                      {errors.email && (
-                        <p className="text-red-500 text-sm mt-2">{errors.email}</p>
-                      )}
+                      {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email}</p>}
                     </div>
 
-                    {/* Subject Field */}
+                    {/* Subject */}
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
@@ -244,15 +231,13 @@ export const Contact = () => {
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className={`w-full bg-bg-elevated border ${errors.subject ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors`}
+                        className={`w-full bg-bg-elevated border ${errors.subject ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono`}
                         placeholder="What's this about?"
                       />
-                      {errors.subject && (
-                        <p className="text-red-500 text-sm mt-2">{errors.subject}</p>
-                      )}
+                      {errors.subject && <p className="text-red-500 text-sm mt-2">{errors.subject}</p>}
                     </div>
 
-                    {/* Message Field */}
+                    {/* Message */}
                     <div>
                       <label className="block font-mono text-sm text-accent-500 mb-2">
                         <span className="text-primary-500 mr-2">&gt;</span>
@@ -263,15 +248,13 @@ export const Contact = () => {
                         value={formData.message}
                         onChange={handleChange}
                         rows={6}
-                        className={`w-full bg-bg-elevated border ${errors.message ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-none`}
+                        className={`w-full bg-bg-elevated border ${errors.message ? 'border-red-500' : 'border-neutral-700'} rounded-md px-4 py-3 text-neutral-200 placeholder-neutral-600 font-mono resize-none`}
                         placeholder="Tell me about your project or inquiry..."
                       />
-                      {errors.message && (
-                        <p className="text-red-500 text-sm mt-2">{errors.message}</p>
-                      )}
+                      {errors.message && <p className="text-red-500 text-sm mt-2">{errors.message}</p>}
                     </div>
 
-                    {/* Submit Button */}
+                    {/* Submit */}
                     <button
                       type="submit"
                       disabled={isSubmitting}
@@ -329,7 +312,7 @@ export const Contact = () => {
                 </div>
               </div>
 
-              {/* Availability Status */}
+              {/* Availability */}
               <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
                 <h3 className="font-mono text-lg font-semibold text-primary-500 mb-6">
                   Availability Status
@@ -374,7 +357,7 @@ export const Contact = () => {
         </div>
       </section>
 
-      {/* Terminal-style footer message */}
+      {/* Footer */}
       <section className="py-24 bg-bg-elevated">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
