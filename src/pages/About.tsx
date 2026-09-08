@@ -29,7 +29,6 @@ export const About = () => {
         'Managed cloud application operations, deployment pipelines, and production support for large-scale distributed systems.',
       icon: Calendar,
     },
-    
     {
       year: '2012 – 2016',
       title: 'B.Tech Information Technology',
@@ -59,7 +58,7 @@ export const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-bg-page">
+    <div className="bg-bg-page">
       {/* Terminal Header */}
       <TerminalHeader
         command="cat about.txt"
@@ -67,9 +66,10 @@ export const About = () => {
       />
 
       {/* Bio Section */}
-      <section className="py-24">
+      <div className="py-24 min-h-[60vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
+            
             {/* Bio Text */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -84,26 +84,31 @@ export const About = () => {
                   <span className="text-primary-500"> cat</span>
                   <span className="text-neutral-400"> bio.txt</span>
                 </div>
+
                 <div className="space-y-4 text-neutral-200 leading-relaxed">
                   <Typewriter
                     text="Hello, I'm Sai Sri Teja Unnava, and I turn cloud infrastructure into production reality."
                     delay={30}
                     className="text-primary-500 font-semibold block mb-4"
                   />
+
                   <p>
                     I design, automate, and deploy systems that transform ideas into production-grade cloud solutions.
                     My journey began with full-stack development, building applications with Java, React, and Node.js.
                   </p>
+
                   <p>
                     Over time, that foundation evolved into a passion for DevOps and Cloud Engineering, where I now
                     focus on scalable infrastructure, clean CI/CD pipelines, and resilient deployments across AWS,
                     GCP, and Azure.
                   </p>
+
                   <p>
                     I work with Docker, Kubernetes, Terraform, GitHub Actions, and GitLab CI/CD to build reliable,
                     automated, and cloud-native systems. My goal is to empower engineering teams to ship confidently
                     and innovate faster.
                   </p>
+
                   <p className="text-primary-500 font-medium">
                     For me, DevOps is about precision, repeatability, and creating systems that scale without friction.
                   </p>
@@ -123,55 +128,62 @@ export const About = () => {
                 <h3 className="font-mono text-primary-500 font-semibold mb-4 text-lg">
                   Quick Stats
                 </h3>
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Experience</span>
                     <span className="text-primary-500 font-mono">5+ years</span>
                   </div>
+
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Cloud Platforms</span>
                     <span className="text-primary-500 font-mono">AWS, GCP, Azure</span>
                   </div>
+
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Projects</span>
                     <span className="text-primary-500 font-mono">7+ deployed</span>
                   </div>
+
                   <div className="flex items-center justify-between">
                     <span className="text-neutral-400">Technologies</span>
                     <span className="text-primary-500 font-mono">19+ mastered</span>
                   </div>
                 </div>
-              </div>
 
-              <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6">
-                <h3 className="font-mono text-primary-500 font-semibold mb-4 text-lg">
-                  Specializations
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    'Cloud Architecture',
-                    'CI/CD Pipelines',
-                    'Infrastructure as Code',
-                    'Container Orchestration',
-                    'Microservices',
-                  ].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-neutral-800 text-neutral-200 text-sm rounded-md border border-neutral-700 hover:border-primary-500/50 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                {/* Specializations */}
+                <div className="bg-bg-elevated border border-neutral-700 rounded-xl p-6 mt-6">
+                  <h3 className="font-mono text-primary-500 font-semibold mb-4 text-lg">
+                    Specializations
+                  </h3>
+
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      'Cloud Architecture',
+                      'CI/CD Pipelines',
+                      'Infrastructure as Code',
+                      'Container Orchestration',
+                      'Microservices',
+                    ].map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1 bg-neutral-800 text-neutral-200 text-sm rounded-md border border-neutral-700 hover:border-primary-500/50 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Timeline Section */}
-      <section className="py-24 bg-bg-surface/30">
+      <div className="py-24 bg-bg-surface/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -224,11 +236,12 @@ export const About = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Philosophy Section */}
-      <section className="py-24">
+      <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -259,14 +272,20 @@ export const About = () => {
                   <div className="w-16 h-16 bg-primary-500/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-500/20 transition-colors">
                     <IconComponent size={32} className="text-primary-500" />
                   </div>
-                  <h3 className="font-semibold text-xl text-neutral-200 mb-4">{point.title}</h3>
-                  <p className="text-neutral-400 leading-relaxed">{point.description}</p>
+
+                  <h3 className="font-semibold text-xl text-neutral-200 mb-4">
+                    {point.title}
+                  </h3>
+
+                  <p className="text-neutral-400 leading-relaxed">
+                    {point.description}
+                  </p>
                 </motion.div>
               );
             })}
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
