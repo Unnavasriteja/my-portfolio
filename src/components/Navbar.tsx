@@ -1,25 +1,59 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronRight, BookOpen, FileText } from 'lucide-react';
 
+const navItems: Array<{ path: string; label: string; icon?: typeof BookOpen }> = [
+  { path: '#home', label: 'Home' },
+  { path: '#about', label: 'About' },
+  { path: '#skills-full', label: 'Skills' },
+  { path: '#projects', label: 'Projects' },
+  { path: '#contact', label: 'Contact' },
+];
+
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('#home');
 
-  // Updated nav items for scrolling
-  const navItems: Array<{ path: string; label: string; icon?: typeof BookOpen }> = [
-    { path: '#home', label: 'Home' },
-    { path: '#about', label: 'About' },
-    { path: '#skills-full', label: 'Skills' },
-    { path: '#projects', label: 'Projects' },
-    { path: '#contact', label: 'Contact' },
-  ];
+  useEffect(() => {
+   // const sectionIds = ['home', 'about', 'skills-full', 'projects', 'contact'];
+    const sectionIds = [
+  'home',
+  'featured-skills',
+  'skills-full',
+  'about',
+  'projects',
+  'contact'
+];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            setActiveSection(`#${id}`);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1,
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const isActive = (path: string) => activeSection === path;
 
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-bg-page/80 backdrop-blur-md border-b border-neutral-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-
             {/* Logo */}
             <a href="#home" className="flex items-center space-x-2 group">
               <div className="text-primary-500 font-mono font-bold text-xl tracking-wide">
@@ -34,6 +68,8 @@ export const Navbar = () => {
             <div className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
+                const active = isActive(item.path);
+
                 return (
                   <a
                     key={item.path}
@@ -41,15 +77,34 @@ export const Navbar = () => {
                     className="relative px-3 py-2 text-sm font-medium transition-all duration-200 group flex items-center gap-2"
                   >
                     {IconComponent && (
-                      <IconComponent 
-                        size={16} 
-                        className="text-neutral-200 group-hover:text-primary-500"
+                      <IconComponent
+                        size={16}
+                        className={
+                          active
+                            ? 'text-primary-500'
+                            : 'text-neutral-200 group-hover:text-primary-500'
+                        }
                       />
                     )}
 
-                    <span className="font-mono text-neutral-200 group-hover:text-primary-500">
+                    <span
+                      className={
+                        active
+                          ? 'font-mono text-primary-500'
+                          : 'font-mono text-neutral-200 group-hover:text-primary-500'
+                      }
+                    >
                       {item.label}
                     </span>
+
+                    {active && (
+                      <motion.div
+                        layoutId="navbar-indicator"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-500 shadow-glow"
+                        initial={false}
+                        transition={{ duration: 0.2 }}
+                      />
+                    )}
                   </a>
                 );
               })}
@@ -80,26 +135,31 @@ export const Navbar = () => {
             <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
+                const active = isActive(item.path);
+
                 return (
                   <a
                     key={item.path}
                     href={item.path}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between px-3 py-3 rounded-md text-base font-medium transition-all duration-200 text-neutral-200 hover:text-primary-500 hover:bg-bg-surface"
+                    className={`flex items-center justify-between px-3 py-3 rounded-md text-base font-medium transition-all duration-200 ${
+                      active
+                        ? 'text-primary-500 bg-bg-surface border-l-2 border-primary-500'
+                        : 'text-neutral-200 hover:text-primary-500 hover:bg-bg-surface'
+                    }`}
                   >
                     <div className="flex items-center gap-3">
                       {IconComponent && (
-                        <IconComponent 
+                        <IconComponent
                           size={16}
-                          className="text-neutral-200"
+                          className={active ? 'text-primary-500' : 'text-neutral-200'}
                         />
                       )}
                       <span className="font-mono">$ {item.label.toLowerCase()}</span>
                     </div>
-
                     <ChevronRight
                       size={16}
-                      className="transition-transform text-neutral-200"
+                      className={active ? 'text-primary-500' : 'text-neutral-200'}
                     />
                   </a>
                 );
