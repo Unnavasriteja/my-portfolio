@@ -144,9 +144,10 @@ export const Contact = () => {
         description="Establishing connection to communication endpoint"
       />
 
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-12">
+      <div className="py-24 min-h-[60vh] relative z-[1]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-12">
+          
             
             {/* Contact Form */}
             <motion.div
@@ -355,7 +356,7 @@ export const Contact = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Footer */}
       <section className="py-24 bg-bg-elevated">
