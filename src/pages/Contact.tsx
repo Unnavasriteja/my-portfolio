@@ -54,7 +54,7 @@ export const Contact = () => {
 
     try {
       const response = await fetch(
-        "https://dlexf7i2dj.execute-api.us-east-1.amazonaws.com/prod/contact",
+        "https://ls4a5328h6.execute-api.ap-south-1.amazonaws.com/Prod/contact",
         {
           method: "POST",
           headers: {
@@ -106,13 +106,13 @@ export const Contact = () => {
       href: `mailto:${CONTACT.email}`,
       color: 'text-blue-500',
     },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: CONTACT.phoneNo,
-      href: `tel:${CONTACT.phoneNo}`,
-      color: 'text-green-500',
-    },
+    // {
+    //   icon: Phone,
+    //   label: 'Phone',
+    //   value: CONTACT.phoneNo,
+    //   href: `tel:${CONTACT.phoneNo}`,
+    //   color: 'text-green-500',
+    // },
     {
       icon: MapPin,
       label: 'Location',

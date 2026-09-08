@@ -164,9 +164,9 @@ export const PROJECTS = [
 ];
 
 export const CONTACT = {
-  address: 'Hyderabad, Telangana, India',
-  phoneNo: '+91 9000600559',
-  email: 'neerajnakka.n@gmail.com',
+  address: 'Hamburg, Germany',
+  phoneNo: '+91 9493592731',
+  email: 'unnavasaisriteja@gmail.com',
   social: {
     github: 'https://github.com/Unnavasriteja',
     linkedin: 'https://linkedin.com/in/saisritejaunnava',
