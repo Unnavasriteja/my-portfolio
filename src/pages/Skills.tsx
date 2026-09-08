@@ -39,6 +39,16 @@ export const Skills = () => {
       skills: SKILLS_BY_CATEGORY.devops,
       color: 'text-green-500',
     },
+
+    // ⭐ Monitoring category placed in the middle
+    {
+      id: 'monitoring',
+      title: 'Monitoring Tools',
+      icon: TerminalIcon,
+      skills: SKILLS_BY_CATEGORY.monitoring,
+      color: 'text-yellow-500',
+    },
+
     {
       id: 'development',
       title: 'Development Stack',
@@ -92,14 +102,17 @@ export const Skills = () => {
         case 'help':
           output = commands.help;
           break;
+
         case 'levels':
           output = commands.levels;
           break;
+
         case 'clear':
           commands.clear();
           setIsProcessing(false);
           return;
-        case 'ls':
+
+        case 'ls': {
           const category = args[1];
           if (category && categories.find(c => c.id === category)) {
             const cat = categories.find(c => c.id === category)!;
@@ -114,14 +127,19 @@ export const Skills = () => {
             ];
           }
           break;
-        case 'cat':
-          const skillName = args.slice(1).join(' ');
-          const skill = SKILLS_BY_CATEGORY.cloud.find(s => s.name.toLowerCase() === skillName) ||
-                       SKILLS_BY_CATEGORY.containers.find(s => s.name.toLowerCase() === skillName) ||
-                       SKILLS_BY_CATEGORY.infrastructure.find(s => s.name.toLowerCase() === skillName) ||
-                       SKILLS_BY_CATEGORY.devops.find(s => s.name.toLowerCase() === skillName) ||
-                       SKILLS_BY_CATEGORY.development.find(s => s.name.toLowerCase() === skillName) ||
-                       SKILLS_BY_CATEGORY.database.find(s => s.name.toLowerCase() === skillName);
+        }
+
+        case 'cat': {
+          const skillName = args.slice(1).join(' ').toLowerCase();
+
+          const skill =
+            SKILLS_BY_CATEGORY.cloud.find(s => s.name.toLowerCase() === skillName) ||
+            SKILLS_BY_CATEGORY.containers.find(s => s.name.toLowerCase() === skillName) ||
+            SKILLS_BY_CATEGORY.infrastructure.find(s => s.name.toLowerCase() === skillName) ||
+            SKILLS_BY_CATEGORY.devops.find(s => s.name.toLowerCase() === skillName) ||
+            SKILLS_BY_CATEGORY.development.find(s => s.name.toLowerCase() === skillName) ||
+            SKILLS_BY_CATEGORY.database.find(s => s.name.toLowerCase() === skillName) ||
+            SKILLS_BY_CATEGORY.monitoring.find(s => s.name.toLowerCase() === skillName);
 
           if (skill) {
             output = [
@@ -135,6 +153,8 @@ export const Skills = () => {
             output = [`Skill "${skillName}" not found`];
           }
           break;
+        }
+
         default:
           output = commands.default(cmd);
       }
@@ -352,8 +372,9 @@ export const Skills = () => {
               {[
                 { cmd: 'help', desc: 'Show commands' },
                 { cmd: 'ls cloud', desc: 'Cloud skills' },
+                { cmd: 'ls monitoring', desc: 'Monitoring tools' },
                 { cmd: 'levels', desc: 'Proficiency guide' },
-                { cmd: 'cat Docker', desc: 'Skill details' },
+                { cmd: 'cat Prometheus', desc: 'Skill details' },
               ].map((item) => (
                 <button
                   key={item.cmd}
