@@ -18,7 +18,7 @@ export const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-bg-page">
+    <div className="bg-bg-page">
       {/* Terminal Header */}
       <TerminalHeader
         command="docker ps -a"
@@ -26,7 +26,7 @@ export const Projects = () => {
       />
 
       {/* Filter Tabs */}
-      <section className="py-12 bg-bg-surface/30">
+      <div className="py-12 bg-bg-surface/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -46,24 +46,25 @@ export const Projects = () => {
               >
                 <Filter size={16} />
                 <span>{filter.label}</span>
-                <span className={`text-xs px-2 py-1 rounded-full ${
-                  activeFilter === filter.id ? 'bg-bg-surface text-primary-500' : 'bg-neutral-700 text-neutral-400'
-                }`}>
+                <span
+                  className={`text-xs px-2 py-1 rounded-full ${
+                    activeFilter === filter.id
+                      ? 'bg-bg-surface text-primary-500'
+                      : 'bg-neutral-700 text-neutral-400'
+                  }`}
+                >
                   {filter.count}
                 </span>
               </button>
             ))}
           </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* Projects Grid */}
-      <section className="py-24">
+      <div className="py-24 min-h-[60vh]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {getProjects().map((project, index) => (
               <motion.div
                 key={project.title}
@@ -81,14 +82,16 @@ export const Projects = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-bg-surface via-transparent to-transparent opacity-60" />
-                  
+
                   {/* Project Type Badge */}
                   <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-mono font-medium ${
-                      project.category === 'devops' 
-                        ? 'bg-green-500/20 text-green-500 border border-green-500/30'
-                        : 'bg-blue-500/20 text-blue-500 border border-blue-500/30'
-                    }`}>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-mono font-medium ${
+                        project.category === 'devops'
+                          ? 'bg-green-500/20 text-green-500 border border-green-500/30'
+                          : 'bg-blue-500/20 text-blue-500 border border-blue-500/30'
+                      }`}
+                    >
                       {project.category === 'devops' ? 'DevOps' : 'Full-Stack'}
                     </span>
                   </div>
@@ -96,17 +99,14 @@ export const Projects = () => {
 
                 {/* Project Content */}
                 <div className="p-6 space-y-4">
-                  {/* Title */}
                   <h3 className="font-mono text-xl font-bold text-primary-500 group-hover:text-primary-400 transition-colors">
                     {project.title}
                   </h3>
 
-                  {/* Description */}
                   <p className="text-neutral-200 text-sm leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
 
-                  {/* Technologies */}
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.slice(0, 4).map((tech) => (
                       <span
@@ -134,7 +134,7 @@ export const Projects = () => {
                       <Github size={16} className="group-hover/btn:scale-110 transition-transform" />
                       <span className="text-sm font-mono">Code</span>
                     </a>
-                    
+
                     {project.websiteLink && (
                       <a
                         href={project.websiteLink}
@@ -154,20 +154,16 @@ export const Projects = () => {
 
           {/* Empty State */}
           {getProjects().length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-24"
-            >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24">
               <div className="font-mono text-4xl text-neutral-600 mb-4">404</div>
               <div className="text-neutral-400">No projects found in this category.</div>
             </motion.div>
           )}
         </div>
-      </section>
+      </div>
 
       {/* Terminal-style project summary */}
-      <section className="py-24 bg-bg-elevated">
+      <div className="py-24 bg-bg-elevated">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -177,10 +173,8 @@ export const Projects = () => {
             className="bg-bg-surface border border-neutral-700 rounded-xl p-8 font-mono"
           >
             <div className="space-y-4">
-              <div className="text-accent-500">
-                $ cat project_summary.txt
-              </div>
-              
+              <div className="text-accent-500">$ cat project_summary.txt</div>
+
               <div className="space-y-2 text-neutral-200">
                 <div className="flex justify-between">
                   <span>Total Projects:</span>
@@ -197,7 +191,7 @@ export const Projects = () => {
                 <div className="flex justify-between">
                   <span>Technologies Used:</span>
                   <span className="text-primary-500">
-                    {new Set(PROJECTS_BY_CATEGORY.all.flatMap(p => p.technologies)).size}+
+                    {new Set(PROJECTS_BY_CATEGORY.all.flatMap((p) => p.technologies)).size}+
                   </span>
                 </div>
               </div>
@@ -205,16 +199,18 @@ export const Projects = () => {
               <div className="pt-4 border-t border-neutral-700 text-sm text-neutral-400">
                 <div className="flex items-center space-x-2">
                   <span className="text-accent-500">$</span>
-                  <span>echo "Each project demonstrates real-world cloud-native engineering and DevOps automation"</span>
+                  <span>
+                    echo "Each project demonstrates real-world cloud-native engineering and DevOps automation"
+                  </span>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
-      </section>
+      </div>
 
       {/* CTA Section */}
-      <section className="py-24">
+      <div className="py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -249,7 +245,7 @@ export const Projects = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
