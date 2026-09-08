@@ -96,3 +96,6 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: #16a34a;
 }
+section {
+  scroll-margin-top: 100px;
+}
