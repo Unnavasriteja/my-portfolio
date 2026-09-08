@@ -168,9 +168,9 @@ export const CONTACT = {
   phoneNo: '+91 9000600559',
   email: 'neerajnakka.n@gmail.com',
   social: {
-    github: 'https://github.com/neerajnakka',
-    linkedin: 'https://linkedin.com/in/neerajchandran',
-    twitter: 'https://twitter.com/neerajnakka',
+    github: 'https://github.com/Unnavasriteja',
+    linkedin: 'https://linkedin.com/in/saisritejaunnava',
+    
   }
 };
 

@@ -16,22 +16,14 @@ export const Footer = () => {
       url: CONTACT.social.linkedin,
       icon: Linkedin,
     },
-    {
-      name: 'Twitter',
-      url: CONTACT.social.twitter,
-      icon: Twitter,
-    },
-    {
-      name: 'Email',
-      url: `mailto:${CONTACT.email}`,
-      icon: Mail,
-    },
+
   ];
 
   return (
     <footer className="bg-bg-elevated border-t border-neutral-700 mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col items-center space-y-8">
+          
           {/* Social Links */}
           <div className="flex items-center space-x-6">
             {socialLinks.map((link, index) => {
@@ -63,7 +55,7 @@ export const Footer = () => {
               <span>copyright.txt</span>
             </div>
             <div className="mt-2 space-y-1 text-xs">
-              <p>© {currentYear} DevOps & Cloud Engineer</p>
+              <p>© {currentYear} Sai Sri Teja Unnava — DevOps & Cloud Engineer</p>
               <p>Built with React, TypeScript, and Cyber Terminal Aesthetic</p>
               <p className="text-primary-500">Status: Available for opportunities</p>
             </div>

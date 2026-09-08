@@ -7,16 +7,15 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navItems = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/skills', label: 'Skills' },
-    { path: '/projects', label: 'Projects' },
-    { path: '/blog', label: 'Blog', icon: BookOpen },
-    { path: '/case-studies', label: 'Case Studies', icon: FileText },
-    { path: '/contact', label: 'Contact' },
-  ];
-
+const navItems: Array<{ path: string; label: string; icon?: typeof BookOpen }> = [
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/skills', label: 'Skills' },
+  { path: '/projects', label: 'Projects' },
+  // { path: '/blog', label: 'Blog', icon: BookOpen },        // Hidden
+  // { path: '/case-studies', label: 'Case Studies', icon: FileText }, // Hidden
+  { path: '/contact', label: 'Contact' },
+];
   const isActive = (path: string) => location.pathname === path;
 
   return (
