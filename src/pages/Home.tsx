@@ -1,9 +1,14 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { ExternalLink, Github, Code2 } from 'lucide-react';
 import { Grid3DBackground } from '../components/Grid3D';
 import { Typewriter } from '../components/Typewriter';
 import { HERO_CONTENT, SKILLS } from '../data/portfolio';
+
+// Import your other pages as components
+import { About } from './About';
+import { Skills as SkillsPage } from './Skills';
+import { Projects } from './Projects';
+import { Contact } from './Contact';
 
 export const Home = () => {
   const stats = [
@@ -17,9 +22,11 @@ export const Home = () => {
 
   return (
     <div className="min-h-screen bg-bg-page relative overflow-hidden">
+
       <Grid3DBackground />
 
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      {/* HERO SECTION */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -27,19 +34,16 @@ export const Home = () => {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            {/* Terminal prompt */}
             <div className="font-mono text-2xl md:text-3xl lg:text-4xl font-bold tracking-wide">
               <span className="text-accent-500 mr-3">$</span>
               <span className="text-primary-500">whoami</span>
             </div>
 
-            {/* Updated Typewriter heading */}
             <div className="font-mono text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-primary-500">
               <Typewriter text="Sai Sri Teja Unnava — DevOps & Cloud Engineer" delay={80} />
               <span className="terminal-cursor ml-2" />
             </div>
 
-            {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -49,33 +53,33 @@ export const Home = () => {
               {HERO_CONTENT}
             </motion.p>
 
-            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.5 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
             >
-              <Link
-                to="/projects"
+              <a
+                href="#projects"
                 className="group inline-flex items-center px-8 py-4 border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-bg-surface transition-all duration-200 font-semibold tracking-wide rounded-lg shadow-glow hover:shadow-card-hover"
               >
                 <Code2 className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 View Projects
-              </Link>
-              <Link
-                to="/contact"
+              </a>
+
+              <a
+                href="#contact"
                 className="group inline-flex items-center px-8 py-4 border-2 border-neutral-600 bg-neutral-800 text-neutral-200 hover:border-primary-500 hover:text-primary-500 transition-all duration-200 font-semibold tracking-wide rounded-lg"
               >
                 <ExternalLink className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Contact Me
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* STATS SECTION */}
       <section className="py-24 relative z-10 bg-bg-surface/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -108,9 +112,10 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Featured Skills Section */}
-      <section className="py-24 relative z-10">
+      {/* FEATURED SKILLS */}
+      <section id="featured-skills" className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -162,53 +167,35 @@ export const Home = () => {
             viewport={{ once: true }}
             className="text-center mt-12"
           >
-            <Link
-              to="/skills"
+            <a
+              href="#skills"
               className="inline-flex items-center text-primary-500 hover:text-primary-400 font-mono font-semibold group"
             >
               <span className="mr-2">View all skills</span>
               <ExternalLink className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 relative z-10 bg-gradient-to-b from-transparent to-bg-elevated/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-bg-elevated border border-primary-500/20 p-12 rounded-2xl shadow-glow"
-          >
-            <h2 className="font-mono text-3xl md:text-4xl font-bold text-primary-500 mb-6">
-              Ready to Deploy Your Vision?
-            </h2>
-            <p className="text-xl text-neutral-200 mb-8 leading-relaxed">
-              Let's build something amazing together. From infrastructure automation to full-stack development, 
-              I'm here to turn your ideas into production reality.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary-500 text-bg-surface font-semibold rounded-lg hover:bg-primary-700 transition-all duration-200 shadow-glow hover:shadow-card-hover"
-              >
-                Start a Project
-              </Link>
-              <a
-                href="https://github.com/Unnavasriteja"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-neutral-600 text-neutral-200 hover:border-primary-500 hover:text-primary-500 font-semibold rounded-lg transition-all duration-200"
-              >
-                <Github className="mr-2 h-5 w-5" />
-                View Code
-              </a>
-            </div>
-          </motion.div>
-        </div>
+      {/* ABOUT SECTION */}
+      <section id="about" className="py-24">
+        <About />
+      </section>
+      
+      <section id="skills-full" className="py-24">
+       <SkillsPage />
+        </section>
+
+
+      {/* PROJECTS SECTION */}
+      <section id="projects" className="py-24">
+        <Projects />
+      </section>
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="py-24">
+        <Contact />
       </section>
     </div>
   );
