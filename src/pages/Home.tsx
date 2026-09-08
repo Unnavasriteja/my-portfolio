@@ -3,6 +3,8 @@ import { ExternalLink, Github, Code2 } from 'lucide-react';
 import { Grid3DBackground } from '../components/Grid3D';
 import { Typewriter } from '../components/Typewriter';
 import { HERO_CONTENT, SKILLS } from '../data/portfolio';
+import { FadeIn } from "../components/FadeIn";
+
 
 // Import your other pages as components
 import { About } from './About';
@@ -180,7 +182,8 @@ export const Home = () => {
 
       {/* ABOUT SECTION */}
       <section id="about" className="py-24">
-        <About />
+        <FadeIn><About /></FadeIn>
+        
       </section>
       
       <section id="skills-full" className="py-24">
@@ -190,12 +193,12 @@ export const Home = () => {
 
       {/* PROJECTS SECTION */}
       <section id="projects" className="py-24">
-        <Projects />
+        <FadeIn><Projects /></FadeIn>
       </section>
 
       {/* CONTACT SECTION */}
       <section id="contact" className="py-24">
-        <Contact />
+        <FadeIn><Contact /></FadeIn>
       </section>
     </div>
   );
