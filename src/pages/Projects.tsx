@@ -205,7 +205,7 @@ export const Projects = () => {
               <div className="pt-4 border-t border-neutral-700 text-sm text-neutral-400">
                 <div className="flex items-center space-x-2">
                   <span className="text-accent-500">$</span>
-                  <span>echo "Each project demonstrates real-world implementation of cloud-native architecture and modern development practices"</span>
+                  <span>echo "Each project demonstrates real-world cloud-native engineering and DevOps automation"</span>
                 </div>
               </div>
             </div>
@@ -227,8 +227,7 @@ export const Projects = () => {
               Interested in Collaboration?
             </h2>
             <p className="text-xl text-neutral-200 mb-8 leading-relaxed">
-              These projects showcase my expertise in DevOps and full-stack development. 
-              Let's discuss how we can work together on your next project.
+              These projects showcase my expertise in DevOps, cloud engineering, and infrastructure automation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
